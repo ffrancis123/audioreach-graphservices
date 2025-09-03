@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := src/gsl_main.c \
     src/gsl_rtc_main.c\
     src/gsl_dynamic_module_mgr.c\
     src/gsl_mdf_utils.c\
+    src/gsl_spf_timeout.c\
     src/gsl_datapath.c\
     src/gsl_msg_builder.c\
     src/gsl_global_persist_cal.c\

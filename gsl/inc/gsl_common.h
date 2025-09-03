@@ -21,6 +21,7 @@
 #include "ar_osal_servreg.h"
 #include "gpr_ids_domains.h"
 #include "gpr_packet.h"
+#include "gsl_spf_timeout.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -43,36 +44,6 @@
 #define GET_DEBUG_TOKEN(x, value) (value) = ((x) & DEBUG_TOKEN_MASK) \
 	>> DEBUG_TOKEN_SHIFT
 #define REMOVE_DEBUG_TOKEN(x) (x) = ((x) & ~DEBUG_TOKEN_MASK)
-
-#if !defined(__GSL_GPR_STUB__) && (defined(_WIN32) || defined(_WIN64)) \
-	&& !defined(_KERNEL_MODE) && defined(ARSPF_WIN_PORTING)
-	/** WIN32/64 - SPF PORTING Timeout can be less than COSIM mode */
-#define GSL_SPF_TIMEOUT_MS  ((3)*(1000))
-#define GSL_GRAPH_OPEN_TIMEOUT_MS  ((3)*(1000))
-#define GSL_SPF_READ_WRITE_TIMEOUT_MS  ((3)*(1000))
-#elif !defined(__GSL_GPR_STUB__) && (defined(_WIN32) || defined(_WIN64)) \
-	&& !defined(_KERNEL_MODE)
-/** WIN32/64 COSIM Mode requires longer delays(30 min) */
-#define GSL_SPF_TIMEOUT_MS  ((1800)*(1000))
-#define GSL_GRAPH_OPEN_TIMEOUT_MS  ((1800)*(1000))
-#define GSL_SPF_READ_WRITE_TIMEOUT_MS  ((3600)*(1000))
-#elif defined(__GSL_GPR_STUB__)
-/**
- * unit-testing with GPR stub we increase the timeout due to APM sim globally
- * serializeng all SPF commands which causes more delays in multi-session tests
- */
-#define GSL_SPF_TIMEOUT_MS  (2000)
-#define GSL_GRAPH_OPEN_TIMEOUT_MS  (2000)
-#define GSL_GRAPH_PREPARE_TIMEOUT_MS  (2000)
-#define GSL_GRAPH_START_STOP_TIMEOUT_MS  (5500)
-#define GSL_SPF_READ_WRITE_TIMEOUT_MS  (60000LL) /* 1 min */
-#else
-#define GSL_SPF_TIMEOUT_MS  (1000)
-#define GSL_GRAPH_OPEN_TIMEOUT_MS  (4000)
-#define GSL_GRAPH_PREPARE_TIMEOUT_MS  (2000)
-#define GSL_GRAPH_START_STOP_TIMEOUT_MS  (5500)
-#define GSL_SPF_READ_WRITE_TIMEOUT_MS  (1000)
-#endif
 
 #define GSL_GET_SPF_SS_MASK(OSAL_SYS_ID) (1<<(OSAL_SYS_ID - 1))
 #define GSL_TEST_SPF_SS_BIT(SPF_SS_MASK, OSAL_SYS_ID) \
