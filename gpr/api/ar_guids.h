@@ -3,7 +3,7 @@
 /**
  * \file gpr_list.h
  * \brief
- *  	This file contains GUID definitions
+ *  	This file contains GUID definitions and Axiom trigger
  *
  *
  * \copyright
