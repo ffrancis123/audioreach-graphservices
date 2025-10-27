@@ -6,8 +6,7 @@ AM_CFLAGS = -Wall -Wno-pointer-to-int-cast -Wno-error=unused-function \
             -Wno-error=unused-label
 AM_CFLAGS += -D__unused=__attribute__\(\(__unused__\)\) -DLINUX_ENABLED
 
-AM_CFLAGS += -I$(srcdir)/api \
-             -I$(top_srcdir)/acdb/ats/transports/diag/linux/inc/
+AM_CFLAGS += -I$(srcdir)/api
 
 osal_sources = ./api/ar_osal_error.h \
                ./api/ar_osal_file_io.h \
@@ -51,6 +50,7 @@ osal_c_sources += ./src/linux/ar_osal_shmem.c
 endif
 
 if USE_DUMMY_DIAG
+AM_CFLAGS += -I$(top_srcdir)/acdb/ats/transports/diag/linux/inc/
 osal_c_sources += ./src/linux/ar_osal_stub_log_pkt_op.c
 else
 osal_c_sources += ./src/linux/qcom/ar_osal_log_pkt_op.c
@@ -79,6 +79,12 @@ endif
 if USE_GLIB
 libar_osal_la_LIBADD += -lglib-2.0
 AM_CFLAGS += $(GLIB_CFLAGS) -D_GNU_SOURCE -include glib.h
+endif
+
+if USE_DUMMY_DIAG
+#dummy diag, do not link real diag libs
+else
+libar_osal_la_LIBADD += -llog -ldiag
 endif
 
 if USE_G_STR_FUNC
