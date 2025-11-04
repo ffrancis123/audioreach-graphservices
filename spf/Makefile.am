@@ -103,6 +103,7 @@ spf_sources = ./api/apm/apm_api.h \
                 ./api/modules/rtm_logging_api.h \
                 ./api/modules/rt_proxy_api.h \
                 ./api/modules/rx_haptics_api.h \
+                ./api/modules/sa_hdt_api.h \
                 ./api/modules/sbc_decoder_api.h \
                 ./api/modules/sbc_encoder_api.h \
                 ./api/modules/sh_mem_pull_push_mode_api.h \
