@@ -1,0 +1,22 @@
+project: https://github.com/AudioReach/audioreach-graphservices
+
+branches:
+  master:
+    modes:
+      non-blocking:
+        headers:
+          - ar_osal/api/*.h
+          - ar_util/api/*.h
+          - gpr/api/*.h
+          - gsl/dls_client_api/*.h
+          - gsl/hw_rsc_api/*.h
+          - gsl/api/*.h
+          - gsl/rtc_api/*.h
+          - acdb/api/*.h
+          - acdb/ats/api/*.h
+          - spf/api/apm/*.h
+          - spf/api/asps/*.h
+          - spf/api/modules/*.h
+          - spf/api/vcpm/*.h
+          - spf/api/ar_utils/*.h
+          - spf/api/ar_utils/generic/*.h
