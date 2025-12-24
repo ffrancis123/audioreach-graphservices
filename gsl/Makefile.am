@@ -30,6 +30,7 @@ gsl_sources = ./inc/gsl_common.h \
               ./inc/gsl_subgraph_driver_props_generic.h \
               ./api/gsl_subgraph_driver_props.h \
               ./inc/gsl_mdf_utils.h \
+              ./inc/gsl_spf_timeout.h \
               ./inc/gsl_global_persist_cal.h \
               ./dls_client_api/gsl_dls_client_intf.h \
               ./inc/gsl_dls_client.h
@@ -37,6 +38,7 @@ gsl_sources = ./inc/gsl_common.h \
 gsl_c_sources = ./src/gsl_graph.c \
                 ./src/gsl_main.c \
                 ./src/gsl_mdf_utils.c \
+                ./src/gsl_spf_timeout.c \
                 ./src/gsl_shmem_mgr.c \
                 ./src/gsl_subgraph.c \
                 ./src/gsl_subgraph_pool.c \
