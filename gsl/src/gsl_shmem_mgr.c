@@ -276,7 +276,7 @@ static int32_t gsl_shmem_handle_rsp(gpr_packet_t *rsp, uint32_t master_proc_id,
 	struct spf_cmd_basic_rsp *basic_rsp;
 	int32_t rc = AR_EOK;
 	if (expected_opcode != rsp->opcode) {
-		GSL_ERR("Recieved unexpected rsp opcode %x, expected %x",
+		GSL_ERR("Received unexpected rsp opcode %x, expected %x",
 			rsp->opcode, expected_opcode);
 		rc = AR_EUNEXPECTED;
 		goto end;

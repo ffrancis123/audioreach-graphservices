@@ -11193,7 +11193,7 @@ int32_t AcdbZip1(uint32_t num_elem_1, uint32_t *list_1,
 
 /**
 * \brief
-*		Checks for the existance of a CKV within the lookup table
+*		Checks for the existence of a CKV within the lookup table
 *
 * \param[in] kv_list: contains the key id and value lists that are
 *            used to compare against an entry in the lookup table
@@ -13867,7 +13867,7 @@ int32_t AcdbGetParameterCalData(AcdbParameterCalData *req, AcdbBlob* rsp)
     if (AR_FAILED(status))
     {
         //Either CKV not found or another error occured
-        ACDB_ERR("Error[%d]: Could not find a matcing CKV.", status);
+        ACDB_ERR("Error[%d]: Could not find a matching CKV.", status);
         return status;
     }
 

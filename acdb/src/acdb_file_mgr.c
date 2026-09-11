@@ -185,11 +185,11 @@ int32_t AcdbFileManRemoveDatabase(acdb_file_man_handle_t* fm_handle);
 /**
 * \brief
 *       1. Comparing Imports to Exports
-*		    Checks for the existance of imports in the newly added
+*		    Checks for the existence of imports in the newly added
 *           database compared to the exports in existing databases
 *
 *       2. Comparing Exports to Imports
-*		    Checks for the existance of exports in the newly added
+*		    Checks for the existence of exports in the newly added
 *           database compared to the imports in existing databases
 *
 *       If subgraphs are found between the new database and the
@@ -1147,7 +1147,7 @@ int32_t AcdbFileManGetHostDatabaseFileInfo(AcdbFileManBlob* rsp)
 
     if (sz_file_info_rsp > rsp->size)
     {
-        ACDB_ERR("Error[%d]: There isnt enough memory to "
+        ACDB_ERR("Error[%d]: There isn't enough memory to "
             "copy file information", AR_ENOMEMORY);
         return AR_ENOMEMORY;
     }
@@ -1295,7 +1295,7 @@ int32_t AcdbFileManGetAllDatabasesFileInfo(AcdbFileManBlob* rsp)
 
     if (sz_file_info_rsp > rsp->size)
     {
-        ACDB_ERR("Error[%d]: There isnt enough memory to "
+        ACDB_ERR("Error[%d]: There isn't enough memory to "
             "copy file information", AR_ENOMEMORY);
         return AR_ENOMEMORY;
     }

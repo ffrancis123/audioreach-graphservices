@@ -50,7 +50,7 @@
 
 #define ACDB_FREE(data) AcdbFree((void*)data)
 
-//TODO: Remove this function once its avalible in the OSAL
+//TODO: Remove this function once its available in the OSAL
 #ifndef ar_sscanf
 #if defined(_WIN64) || defined(_WIN32)
 #define ar_sscanf(buf, format, ...) sscanf_s(buf, format, __VA_ARGS__)

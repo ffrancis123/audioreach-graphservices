@@ -294,7 +294,7 @@ static int32_t gsl_cshm_handle_rsp(gpr_packet_t *rsp, uint32_t expected_opcode)
     };
 
     if (expected_opcode != rsp->opcode) {
-        GSL_ERR("Recieved unexpected rsp opcode %x, expected %x",
+        GSL_ERR("Received unexpected rsp opcode %x, expected %x",
             rsp->opcode, expected_opcode);
         rc = AR_EUNEXPECTED;
     }

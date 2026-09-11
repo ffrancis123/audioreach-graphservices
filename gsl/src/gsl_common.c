@@ -279,7 +279,7 @@ int32_t gsl_send_spf_cmd_wait_for_basic_rsp(gpr_packet_t **packet,
 	if (!rc && rsp && rsp->opcode == GPR_IBASIC_RSP_RESULT) {
 		basic_rsp = GPR_PKT_GET_PAYLOAD(struct spf_cmd_basic_rsp, rsp);
 		if (cached_opcode != basic_rsp->opcode) {
-			GSL_ERR("Recieved unexpected rsp opcode %x, expected %x",
+			GSL_ERR("Received unexpected rsp opcode %x, expected %x",
 				basic_rsp->opcode, cached_opcode);
 			rc = AR_EUNEXPECTED;
 		}

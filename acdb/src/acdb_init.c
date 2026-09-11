@@ -272,7 +272,7 @@ int32_t acdb_init_add_database(acdb_init_database_paths_t *database_paths,
 	uint32_t remaining_file_slots = 0;
 	uint32_t num_data_files = 0;
 	bool_t should_ignore_delta_file = FALSE;
-	bool_t is_writable_path_avalible = FALSE;
+	bool_t is_writable_path_available = FALSE;
 	acdb_file_version_t acdb_file_version = { 0 };
 	AcdbFileManFileInfo *fm_file_info = NULL;
 	AcdbDeltaFileManFileInfo *dfm_file_info = NULL;
@@ -289,7 +289,7 @@ int32_t acdb_init_add_database(acdb_init_database_paths_t *database_paths,
 
 	if (database_paths->num_files > ACDB_MAX_FILE_ADD_LIMIT)
 	{
-		ACDB_ERR("Error[%d]: The max number of files that can be initalized "
+		ACDB_ERR("Error[%d]: The max number of files that can be initialized "
 			"is %d: one *.qwsp and one *.acdb", AR_EBADPARAM,
 			ACDB_MAX_FILE_ADD_LIMIT);
 		return AR_EBADPARAM;
@@ -305,7 +305,7 @@ int32_t acdb_init_add_database(acdb_init_database_paths_t *database_paths,
 		goto end;
 	}
 
-	is_writable_path_avalible = !IsNull(database_paths->writable_path.path);
+	is_writable_path_available = !IsNull(database_paths->writable_path.path);
 
 	fm_db_files.num_files = database_paths->num_files;
 	fm_file_info = ACDB_MALLOC(
@@ -353,7 +353,7 @@ int32_t acdb_init_add_database(acdb_init_database_paths_t *database_paths,
 		num_data_files++;
 
 		/* Load delta file */
-		if (is_writable_path_avalible)
+		if (is_writable_path_available)
 		{
 			status = AcdbInitLoadDeltaFile(
 				&fm_file_info[i], &acdb_file_version,
@@ -391,7 +391,7 @@ int32_t acdb_init_add_database(acdb_init_database_paths_t *database_paths,
 			(uint8_t*)&fm_ctx_handle.vm_id, sizeof(uint32_t),
 			(uint8_t*)&ctx_handle.heap_handle, sizeof(acdb_heap_handle_t));
 
-		if (is_writable_path_avalible && !should_ignore_delta_file)
+		if (is_writable_path_available && !should_ignore_delta_file)
 		{
 			dfm_file_info[i].vm_id = fm_ctx_handle.vm_id;
 			dfm_file_info[i].acdb_file_index = findex;
@@ -423,7 +423,7 @@ int32_t acdb_init_add_database(acdb_init_database_paths_t *database_paths,
 
 		/* Load the contents of the delta file into the heap */
 
-		if (is_writable_path_avalible && !should_ignore_delta_file)
+		if (is_writable_path_available && !should_ignore_delta_file)
 		{
 			uint32_t delta_status = acdb_delta_data_ioctl(ACDB_DELTA_DATA_CMD_INIT_HEAP,
 				&ctx_handle, sizeof(acdb_context_handle_t),
@@ -435,7 +435,7 @@ int32_t acdb_init_add_database(acdb_init_database_paths_t *database_paths,
 			}
 		}
 
-		if (is_writable_path_avalible)
+		if (is_writable_path_available)
 		{
 			/* The delta file path serves two purposes:
 			*	1. to store the delta files

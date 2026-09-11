@@ -65,7 +65,7 @@ int32_t fts_open_file(
 
     ATS_DBG("Opening/creating %s...", req.file_path);
 
-    //Search for avalible file slot
+    //Search for available file slot
     for (; findex < FTS_MAX_FILE_COUNT; findex++)
         if (fts_file_table->fhandle[findex] == NULL)
             break;

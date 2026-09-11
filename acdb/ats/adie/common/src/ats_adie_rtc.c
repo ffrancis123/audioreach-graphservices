@@ -244,7 +244,7 @@ int32_t ats_adie_get_multiple_register(
     if (rsp_buf_size < *rsp_buf_bytes_filled)
     {
         ATS_ERR("Error[%d]: Not enough memory to copy response. "
-            "The memory avalible is %d bytes and the size needed is &d bytes",
+            "The memory available is %d bytes and the size needed is &d bytes",
             AR_ENEEDMORE, rsp_buf_size, *rsp_buf_bytes_filled);
     }
 

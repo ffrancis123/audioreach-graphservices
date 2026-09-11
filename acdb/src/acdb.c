@@ -842,7 +842,7 @@ int32_t acdb_cmd_set_temp_path(AcdbSetTempPathReq *req)
     else if (AR_FAILED(status))
     {
         ACDB_ERR("Error[%d]: An error occured while trying to verify"
-            " the existance of the following path %s", status,
+            " the existence of the following path %s", status,
             &swap_finfo.path_info.path[0]);
         return status;
     }

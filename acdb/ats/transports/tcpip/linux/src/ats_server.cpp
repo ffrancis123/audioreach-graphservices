@@ -519,7 +519,7 @@ void* ats_server_transmit_routine(void* client_socket_ptr)
 	while (true)
 	{
 		//keep listening for whole incoming messages
-		int32_t bytes_recieved = 0;
+		int32_t bytes_received = 0;
 		uint32_t headerBytesRead = 0;
 		uint32_t msg_len = 0;
 		//---------------------------
@@ -532,7 +532,7 @@ void* ats_server_transmit_routine(void* client_socket_ptr)
 		{
 			//receive full message header
 			ATS_ERR("Waiting to recieve message...");
-			bytes_recieved = recv(client_socket, recvbuf, ATS_HEADER_LENGTH - headerBytesRead, 0);
+			bytes_received = recv(client_socket, recvbuf, ATS_HEADER_LENGTH - headerBytesRead, 0);
 
 			//client sends "QUIT" to signal end of connection. At that point, close socket and return.
 			if (strncmp(recvbuf, ATS_SERVER_CMD_QUIT, 4) == 0)
@@ -543,25 +543,25 @@ void* ats_server_transmit_routine(void* client_socket_ptr)
 				goto threaddone;
 			}
 
-			if (bytes_recieved > 0)
+			if (bytes_received > 0)
 			{
-				ATS_DBG("Recieved %d bytes", bytes_recieved);
-				ACDB_MEM_CPY_SAFE(msgBuf + headerBytesRead, bytes_recieved, recvbuf, bytes_recieved);
-				headerBytesRead += bytes_recieved;
+				ATS_DBG("Received %d bytes", bytes_received);
+				ACDB_MEM_CPY_SAFE(msgBuf + headerBytesRead, bytes_received, recvbuf, bytes_received);
+				headerBytesRead += bytes_received;
 
 				//this determines how many bytes to expect (thus determining how many times to loop).
-				if (get_command_length_s(msgBuf, bytes_recieved, &msg_len))
+				if (get_command_length_s(msgBuf, bytes_received, &msg_len))
 				{
 					svc_cmd_id = 0;
 					ACDB_MEM_CPY_SAFE(&svc_cmd_id, ATS_SERVICE_COMMAND_ID_LENGTH,
 						msgBuf + ATS_SERVICE_COMMAND_ID_POSITION, ATS_SERVICE_COMMAND_ID_LENGTH);
 
                     ATS_SERVICE_ID_STR(svc_id_str, ATS_SEVICE_ID_STR_LEN, svc_cmd_id);
-					ATS_ERR("Recieved Command[%s-%d] with length %d bytes", svc_id_str, ATS_GET_COMMAND_ID(svc_cmd_id), msg_len);
+					ATS_ERR("Received Command[%s-%d] with length %d bytes", svc_id_str, ATS_GET_COMMAND_ID(svc_cmd_id), msg_len);
 					break;
 				}
 			}
-			else if (bytes_recieved <= 0)
+			else if (bytes_received <= 0)
 			{
 				if (errno == EINTR) continue;
 
@@ -587,17 +587,17 @@ void* ats_server_transmit_routine(void* client_socket_ptr)
 			uint32_t recv_len = remaining_recv_len > ATS_RECIEVE_BUF_SIZE ? remaining_recv_len : ATS_RECIEVE_BUF_SIZE;
 
 			//will receive min(ATS_RECIEVE_BUF_SIZE, bytes left to receive to complete message)
-			bytes_recieved = recv(client_socket, recvbuf, recv_len, 0);
+			bytes_received = recv(client_socket, recvbuf, recv_len, 0);
 
-			if (bytes_recieved > 0) {
-				ATS_ERR("Recieved %d bytes", bytes_recieved);
-				ACDB_MEM_CPY_SAFE(msgBuf + ATS_HEADER_LENGTH + payload_bytes_read, bytes_recieved, recvbuf, bytes_recieved);
-				payload_bytes_read += bytes_recieved;
+			if (bytes_received > 0) {
+				ATS_ERR("Received %d bytes", bytes_received);
+				ACDB_MEM_CPY_SAFE(msgBuf + ATS_HEADER_LENGTH + payload_bytes_read, bytes_received, recvbuf, bytes_received);
+				payload_bytes_read += bytes_received;
 				if (payload_bytes_read == msg_len) {
 					break;
 				}
 			}
-			else if (bytes_recieved <= 0) {
+			else if (bytes_received <= 0) {
                 if (errno == EINTR) {
                     ATS_ERR("Signal interrupt. Continuing...");
                     continue;

@@ -53,7 +53,7 @@ struct _acdb_delta_file_man_file_info_t {
     uint32_t acdb_file_index;
     /**< A flag indicating whether the delta file is updated */
 	uint32_t is_updated;
-    /**< A flag that determines the existance of the delta file */
+    /**< A flag that determines the existence of the delta file */
 	uint32_t exists;
     /**< The size of the delta file */
 	uint32_t file_size;
