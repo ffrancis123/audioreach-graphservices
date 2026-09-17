@@ -7,4 +7,4 @@ Name: ats
 Description: ats library
 Version: @LT_VERSION@
 Libs: -L${libdir} -lar-ats
-Cflags: -I${includedir}\ats
+Cflags: -I${includedir}
